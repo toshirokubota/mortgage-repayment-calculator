@@ -1,0 +1,133 @@
+body {
+  margin: 0;
+  display: flex;
+  // place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1280px;
+  // margin: 0 auto;
+  // padding: 2rem;
+  // text-align: center;
+}
+
+main {
+  //align-items: center;
+  display: flex;
+  flex-direction: column;
+  // max-width: 750px;
+  //padding: 1.5rem;
+  // width: 100%;
+}
+
+.input-area {
+  width: 100%;
+  background-color: hsl(var(--color-white));
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 1.5rem;
+
+  header {
+    margin-block: 1rem;
+
+    .clear-all {
+      border: none;
+      background-color: transparent;
+      border-bottom: solid 1pt hsl(var(--color-slate-700));
+    }
+  }
+  form {
+    width: 100%;
+    label {
+      display: block;
+    }
+    .input-wrapper {
+      display:grid;
+      //align-items: stretch; /* Vertically stretches items to fill the grid cell */
+      //justify-items: stretch; /* Horizontally stretches items to fill the grid cell */
+      width: 100%;
+      //padding-block: 0.5rem;
+      border-radius: 4px;
+      border: solid 1pt hsl(var(--color-slate-500));
+      input {
+        border: none;
+        outline: none;
+        padding: 0.5rem 1rem;
+      }  
+      span {
+        // width: 100%;
+        // height: 100%;
+        // display: block;
+        background-color: hsl(var(--color-slate-100));
+        padding-block: 0.5rem;
+        text-align: center;
+      }
+    }
+    .input-wrapper.input-amount {
+      grid-template-columns: 10% 90%;
+      grid-template-rows: auto;
+    }
+    .input-wrapper.input-term {
+      grid-template-columns: 80% 20%;
+      grid-template-rows: auto;
+    }
+    .input-wrapper.input-rate {
+      grid-template-columns: 90% 10%;
+      grid-template-rows: auto;
+    }
+    fieldset {
+      border: none;
+      padding: 0;
+      legend {
+        text-align: left;
+      }
+      label {
+        border-radius: 4px;
+        border: solid 1pt hsl(var(--color-slate-500));
+        margin-block: 0.5rem;
+        padding: 0.5rem;
+      }
+      span {
+        margin-left: 1rem;
+      }
+    }
+    button {
+      width: 100%;
+      background-color: hsl(var(--color-lime));
+      padding-block: 0.5rem;
+      border-radius: 1.5rem;
+      border: none;
+      outline: none;
+    }
+    & > * {
+      margin-block: 1rem;
+    }
+  }
+}
+
+.result-area {
+  background-color: hsl(var(--color-slate-900));
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 1.5rem;
+
+  * {
+    margin-block: 0.75rem;
+  }
+
+  .result-card {
+    width: 100%;
+    background-color: hsla(0, 0%, 0%, 0.25);
+    border-top: solid 4pt hsl(var(--color-lime));
+    border-radius: 8px;
+    padding: 1rem;
+
+    hr {
+      color: hsla(var(--color-slate-300)/0.25);
+    }
+  }
+}

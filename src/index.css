@@ -1,0 +1,141 @@
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+/* Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-weight: 400;
+}
+
+/* make form elements easier to work with */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+:root {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+  /* Typography */
+  --fs-headerL: 56px;
+  --fs-headerS: 24px;
+  --fs-bodyL: 18px;
+  --fs-bodyM: 16px;
+  --fs-bodyS: 14px;
+  /* Color */
+  --color-red: 4 69% 50%;
+  --color-lime: 61 70% 52%;
+  --color-slate-900: 202 55% 16%;
+  --color-slate-700: 200 24% 40%;
+  --color-slate-500: 200 26% 54%;
+  --color-slate-300: 203 41% 72%;
+  --color-slate-100: 202 86% 94%;
+  --color-white: 0 0 100%;
+  color-scheme: light dark;
+  color: hsl(var(--color-slate-900));
+  background-color: hsl(var(--color-white));
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-headerL {
+  font-size: var(--fs-headerL);
+  font-weight: 700;
+  line-height: 125%;
+  letter-spacing: -1px;
+}
+
+.font-headerS {
+  font-size: var(--fs-headerS);
+  font-weight: 700;
+  line-height: 125%;
+  letter-spacing: -1px;
+}
+
+.font-bodyL {
+  font-size: var(--fs-bodyL);
+  font-weight: 700;
+  line-height: 125%;
+  letter-spacing: -1px;
+}
+
+.font-bodyM {
+  font-size: var(--fs-bodyM);
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0px;
+}
+
+.font-bodyS {
+  font-size: var(--fs-bodyS);
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0px;
+}
+
+.font-lime {
+  color: hsl(var(--color-lime));
+}
+
+.font-white {
+  color: hsl(var(--color-white));
+}
+
+.font-slate-300 {
+  color: hsl(var(--color-slate-300));
+}
+
+.font-slate-700 {
+  color: hsl(var(--color-slate-700));
+}
+
+.font-slate-900 {
+  color: hsl(var(--color-slate-700));
+}
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}/*# sourceMappingURL=index.css.map */
