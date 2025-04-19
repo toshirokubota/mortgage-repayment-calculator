@@ -27,13 +27,13 @@ export default function CalculationResult({payment}) {
     }
     function CalculationResultCard({payment}) {
         return (
-        <>
+        <div className='result-card'>
             <h2 className='font-HeaderS font-white'>Your results</h2>
             <p className='font-bodyM font-slate-300'>
                 Your results are shown below based on the information you provided. 
                 To adjust the results, edit the form and click “calculate repayments” again. 
             </p>
-            <div className='result-card'>
+            <div className='result-subcard'>
                 <h3 className='font-bodyM font-slate-300'>Your monthly repayments</h3>
                 <p  className='font-headerL font-lime'>
                     {formatter.format(payment.monthlyPayment)}
@@ -44,7 +44,7 @@ export default function CalculationResult({payment}) {
                     {formatter.format(payment.totalPayment)}
                 </p>
             </div>
-        </>
+        </div>
         );
     }
 

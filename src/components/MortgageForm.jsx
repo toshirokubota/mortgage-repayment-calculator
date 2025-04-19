@@ -2,12 +2,17 @@ import { useState } from 'react'
 // import { Link } from 'react-router-dom'
 import icon_calculator from "../../public/assets/images/icon-calculator.svg"
 import '../App.css'
+import { isEmpty, isCurrency, isPositive, isNaturalNumber } from '../Utils.jsx';
 
 export default function MortgageForm({ payment, setPayment }) {
-    const [amount, setAmount] = useState(0);
-    const [term, setTerm] = useState(0);
-    const [apr, setApr] = useState(0);
-    const [mortgageType, setMortgageType] = useState(null);
+    const [amount, setAmount] = useState('');
+    const [term, setTerm] = useState('');
+    const [apr, setApr] = useState('');
+    const [mortgageType, setMortgageType] = useState('');
+    const [errorAmount, setErrorAmount] = useState('none');
+    const [errorApr, setErrorApr] = useState('none');
+    const [errorTerm, setErrorTerm] = useState('none');
+    const [errorType, setErrorType] = useState('none');
 
     function calculateMonthlyPayment(total, apr, year, repayment) {
         if (repayment) {
@@ -21,37 +26,70 @@ export default function MortgageForm({ payment, setPayment }) {
         }
     }
 
+    function validateAmount(amount) {
+        if(isEmpty(amount)) {
+            setErrorAmount('This field is required');
+        } else if(!isCurrency(amount)) {
+            setErrorAmount('Provide a valid currency value');
+        } else {
+            setErrorAmount('none');
+        }
+    }
+
+    function validateAPR(apr) {
+        if(isEmpty(apr)) {
+            setErrorApr('This field is required');
+        } else if(!isPositive(apr)) {
+            setErrorApr('Provide a valid percentage value');
+        } else {
+            setErrorApr('none');
+        }
+    }
+    function validateTerm(term) {
+        if(isEmpty(term)) {
+            setErrorTerm('This field is required');
+        } else if(!isNaturalNumber(term)) {
+            setErrorTerm('Provide the number of years');
+        } else {
+            setErrorTerm('none');
+        }
+    } 
+    function validateMortgageType(type) {
+        if(type === '') {
+            setErrorType('This field is required');
+        } else {
+            setErrorType('none');
+        }
+    } 
+    function isValid(str) {
+        return str === 'none';
+    }
+       
     function handleSubmit(event) {
         event.preventDefault();
-        // const formData = new FormData(event.currentTarget);
-        // const data = Object.fromEntries(formData);
-        // console.log(data)
-        // const amount = formData.get('amount');
-        // const term = formData.get('term');
-        // const rate = formData.get('rate');
-        // const type = formData.get('mortgageType');
-
-        // const newMortgage = {
-        //     total: parseFloat(amount),
-        //     apr: parseFloat(rate),
-        //     year: parseInt(term),
-        //     repayment: type === 'repayment'
-        // };
-
-        console.log(amount, term, apr, mortgageType);
-        const monthlyPayment = calculateMonthlyPayment(amount, apr, term, mortgageType);
-        const totalPayment = monthlyPayment * term * 12;
-        console.log(monthlyPayment, totalPayment);
-        setPayment({monthlyPayment, totalPayment});
-
-        // event.currentTarget.reset();
+        
+        validateAmount(amount);
+        validateAPR(apr);
+        validateTerm(term);
+        validateMortgageType(mortgageType);
+        if(isValid(errorAmount) && isValid(errorTerm) && isValid(errorApr) && isValid(errorType)) {
+            console.log(amount, term, apr, mortgageType);
+            const monthlyPayment = calculateMonthlyPayment(amount, apr, term, mortgageType);
+            const totalPayment = monthlyPayment * term * 12;
+            console.log(monthlyPayment, totalPayment);
+            setPayment({monthlyPayment, totalPayment});
+        }
     }
 
     function clearForm() {
-        setAmount(0);
-        setApr(0);
-        setTerm(0);
+        setAmount('');
+        setApr('');
+        setTerm('');
         setMortgageType('');
+        setErrorAmount('none');
+        setErrorApr('none');
+        setErrorTerm('none');
+        setErrorType('none');
         setPayment({monthlyPayment: 0, totalPayment: 0});
     }
 
@@ -63,30 +101,39 @@ export default function MortgageForm({ payment, setPayment }) {
                 className='clear-all font-bodyM font-slate-700'>Clear All</button>
             </header>
             <form onSubmit={handleSubmit} className='mortgage-form'>
-                <label>
+                <label className={errorAmount === 'none' ? '': 'invalid'}>
                     <span className='font-bodyM font-slate-700'>Mortgage Amount</span>
                     <div className='input-wrapper input-amount'>
                         <span className='font-bodyL font-slate-700'>{"\u00A3"}</span>
                         <input type='text' name='amount' value={amount}
-                            onChange={e => setAmount(e.target.value)} />
+                            onChange={e => {setAmount(e.target.value); setErrorAmount('none');}} />
                     </div>
+                    <p className='font-bodyS font-red'>
+                        {errorAmount !== 'none' && errorAmount}
+                    </p>
                 </label>
-                <div className='input-subcontainer flex flex-column'>
-                    <label>
+                <div className='input-subcontainer'>
+                    <label className={errorTerm === 'none' ? '': 'invalid'}>
                         <span className='font-bodyM font-slate-700'>Mortgage Term</span>
                         <div className='input-wrapper input-term'>
                             <input type='text' name='term' value={term}
-                                onChange={e => setTerm(e.target.value)}/>
+                                onChange={e => {setTerm(e.target.value); setErrorTerm('none')}}/>
                             <span className='font-bodyL font-slate-700'>years</span>
                         </div>
+                        <p className='font-bodyS font-red'>
+                            {errorTerm !== 'none' && errorTerm}
+                        </p>
                     </label>
-                    <label>
+                    <label className={errorApr === 'none' ? '': 'invalid'}>
                         <span className='font-bodyM font-slate-700'>Interest Rate</span>
                         <div className='input-wrapper input-rate'>
                             <input type='text' name='rate'  value={apr} 
-                                onChange={e => setApr(e.target.value)}/>
+                                onChange={e => {setApr(e.target.value); setErrorApr('none')}}/>
                             <span className='font-bodyL font-slate-700'>%</span>
                         </div>
+                        <p className='font-bodyS font-red'>
+                            {errorApr !== 'none' && errorApr}
+                        </p>
                     </label>
                 </div>
                 <fieldset>
@@ -94,17 +141,23 @@ export default function MortgageForm({ payment, setPayment }) {
                     <label className={mortgageType=='repayment' ? 'checked': ''}>
                         <input type="radio" name="mortgageType" value="repayment"
                             className='font-bodyL font-slate-900'
-                            onChange={e => setMortgageType(e.target.value)}
+                            onChange={e => {setMortgageType(e.target.value); setErrorType('none');}}
                             checked={mortgageType=='repayment'}/>
+                            <span class="custom-radio"></span>
                         <span className='font-bodyL font-slate-900'>Repayment</span>
                     </label>
                     <label className={mortgageType=='interest-only' ? 'checked': ''}>
                         <input type="radio" name="mortgageType" value="interest-only"
                             className='font-bodyL font-slate-900'   
-                            onChange={e => setMortgageType(e.target.value)}
+                            onChange={e => {setMortgageType(e.target.value); setErrorType('none');}}
                             checked={mortgageType=='interest-only'}/>
+                            <span class="custom-radio"></span>
                         <span className='font-bodyL font-slate-900'>Interest only</span>
                     </label>
+                    <p className='font-bodyS font-red'>
+                        {errorType !== 'none' && errorType}
+                    </p>
+
                 </fieldset>
 
                 <button className='font-bodyL font-slate-900'>
