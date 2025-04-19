@@ -5,19 +5,15 @@ import MortgageForm from './components/MortgageForm'
 import CalculationResult from './components/CalculationResult'
 
 function App() {
-  const [mortgage, setMortgage] = useState({
-    total: 0, 
-    apr: 0, 
-    year: 0, 
-    repayment: false,
+  const [payment, setPayment] = useState({
     monthlyPayment: 0,
     totalPayment: 0
   });
 
   return (
     <main>
-      <MortgageForm mortgage={mortgage} setMortgage={setMortgage}/>
-      <CalculationResult mortgage={mortgage} />
+      <MortgageForm payment={payment} setPayment={setPayment}/>
+      <CalculationResult payment={payment} />
     </main>
   )
 }

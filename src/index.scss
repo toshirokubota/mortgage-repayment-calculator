@@ -107,6 +107,9 @@ select {
 .font-lime {
     color: hsl(var(--color-lime));
 }
+.font-red {
+    color: hsl(var(--color-red));
+}
 .font-white {
     color: hsl(var(--color-white));
 }
@@ -122,6 +125,9 @@ select {
 
 .flex{
     display: flex;
+}
+.flex-column {
+    flex-direction: column;
 }
 .align-center {
     align-items: center;

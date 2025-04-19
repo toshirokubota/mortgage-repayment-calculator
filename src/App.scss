@@ -1,3 +1,7 @@
+/* media query break points */
+$tablet-break: 700px; //45rem;
+$desktop-break: 1200px; //78rem;
+
 body {
   margin: 0;
   display: flex;
@@ -62,7 +66,7 @@ main {
         // height: 100%;
         // display: block;
         background-color: hsl(var(--color-slate-100));
-        padding-block: 0.5rem;
+        padding-block: .8rem;
         text-align: center;
       }
     }
@@ -90,14 +94,35 @@ main {
         margin-block: 0.5rem;
         padding: 0.5rem;
       }
+      label.checked {
+        background-color: hsl(var(--color-lime)/0.15);
+        border: solid 1pt hsl(var(--color-lime));
+      }
       span {
         margin-left: 1rem;
       }
+      input {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        padding: 2px;
+        border-radius: 8px;
+        border: solid 1pt hsl(var(--color-slate-700));
+        background-color: transparent;
+      }
+      input:checked {
+        border: solid 1pt hsl(var(--color-lime));
+        background-color: hsl(var(--color-lime));
+      }
+      // input:checked {
+      //   accent-color: hsl(var(--color-lime));
+      // }
     }
     button {
       width: 100%;
       background-color: hsl(var(--color-lime));
-      padding-block: 0.5rem;
+      padding-block: 1rem;
       border-radius: 1.5rem;
       border: none;
       outline: none;
@@ -105,20 +130,37 @@ main {
     & > * {
       margin-block: 1rem;
     }
+    @media (min-width: $tablet-break) {
+      .input-subcontainer {
+        flex-direction: row;
+        gap: 1rem;
+        & > * {
+          flex: 1 1 50%;
+        }
+      }
+    }
+    @media (min-width: $desktop-break) {
+    
+    }
   }
 }
 
 .result-area {
   background-color: hsl(var(--color-slate-900));
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: start;
   padding: 1.5rem;
 
-  * {
+  & > * {
     margin-block: 0.75rem;
   }
-
+  .empty-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;  
+  }
   .result-card {
     width: 100%;
     background-color: hsla(0, 0%, 0%, 0.25);

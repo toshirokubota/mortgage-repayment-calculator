@@ -1,21 +1,20 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+// import { useState } from 'react'
+// import { Link } from 'react-router-dom'
 //import './App.css'
+import empty_illustration from "../../public/assets/images/illustration-empty.svg"
 
-export default function CalculationResult({mortgage}) {
+export default function CalculationResult({payment}) {
 
     // Formatting the number as British currency
     const formatter = new Intl.NumberFormat('en-GB', {
         style: 'currency',
         currency: 'GBP',
     });
-//   const formattedValue = formatter.format(1234567.89); // £1,234,567.89
-//   console.log(formattedValue);
 
     function EmptyCard() {
         return(
-            <>
-                <img src="/assets/images/illustration-empty.svg" alt="no result yet"/>
+            <div className="empty-card">
+                <img src={empty_illustration} alt="no result yet"/>
                 <h2 className='font-HeaderS font-white'>
                     Results shown here
                 </h2>
@@ -23,10 +22,10 @@ export default function CalculationResult({mortgage}) {
                     Complete the form and click “calculate repayments” to see what 
                 your monthly repayments would be.
                 </p>
-            </>
+            </div>
         )
     }
-    function CalculationResultCard({mortgage}) {
+    function CalculationResultCard({payment}) {
         return (
         <>
             <h2 className='font-HeaderS font-white'>Your results</h2>
@@ -37,12 +36,12 @@ export default function CalculationResult({mortgage}) {
             <div className='result-card'>
                 <h3 className='font-bodyM font-slate-300'>Your monthly repayments</h3>
                 <p  className='font-headerL font-lime'>
-                    {formatter.format(mortgage.monthlyPayment)}
+                    {formatter.format(payment.monthlyPayment)}
                 </p>
                 <hr/>
                 <h3 className='font-bodyM font-slate-300'>Total you'll repay over the term</h3>
                 <p  className='font-headerS font-white'> 
-                    {formatter.format(mortgage.totalPayment)}
+                    {formatter.format(payment.totalPayment)}
                 </p>
             </div>
         </>
@@ -52,8 +51,8 @@ export default function CalculationResult({mortgage}) {
     return (
         <div className='result-area'>
             {
-                mortgage.total > 0 ? 
-                <CalculationResultCard mortgage={mortgage} /> 
+                payment.monthlyPayment > 0 ? 
+                <CalculationResultCard payment={payment} /> 
                 :
                 <EmptyCard />
             }
