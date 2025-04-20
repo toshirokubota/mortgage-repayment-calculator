@@ -12,10 +12,10 @@ export default function MortgageForm({ payment, setPayment }) {
     const [errorAmount, setErrorAmount] = useState('none');
     const [errorApr, setErrorApr] = useState('none');
     const [errorTerm, setErrorTerm] = useState('none');
-    const [errorType, setErrorType] = useState('none');
+    const [errorMortgageType, setErrorMortgageType] = useState('none');
 
-    function calculateMonthlyPayment(total, apr, year, repayment) {
-        if (repayment) {
+    function calculateMonthlyPayment(total, apr, year, mortgageType) {
+        if (mortgageType == 'repayment') {
             const rate = apr / (12 * 100);
             const num_pays = year * 12;
             const Z = Math.pow(1.0 + rate, num_pays);
@@ -56,9 +56,9 @@ export default function MortgageForm({ payment, setPayment }) {
     } 
     function validateMortgageType(type) {
         if(type === '') {
-            setErrorType('This field is required');
+            setErrorMortgageType('This field is required');
         } else {
-            setErrorType('none');
+            setErrorMortgageType('none');
         }
     } 
     function isValid(str) {
@@ -72,7 +72,7 @@ export default function MortgageForm({ payment, setPayment }) {
         validateAPR(apr);
         validateTerm(term);
         validateMortgageType(mortgageType);
-        if(isValid(errorAmount) && isValid(errorTerm) && isValid(errorApr) && isValid(errorType)) {
+        if(isValid(errorAmount) && isValid(errorTerm) && isValid(errorApr) && isValid(errorMortgageType)) {
             console.log(amount, term, apr, mortgageType);
             const monthlyPayment = calculateMonthlyPayment(amount, apr, term, mortgageType);
             const totalPayment = monthlyPayment * term * 12;
@@ -89,7 +89,7 @@ export default function MortgageForm({ payment, setPayment }) {
         setErrorAmount('none');
         setErrorApr('none');
         setErrorTerm('none');
-        setErrorType('none');
+        setErrorMortgageType('none');
         setPayment({monthlyPayment: 0, totalPayment: 0});
     }
 
@@ -141,21 +141,21 @@ export default function MortgageForm({ payment, setPayment }) {
                     <label className={mortgageType=='repayment' ? 'checked': ''}>
                         <input type="radio" name="mortgageType" value="repayment"
                             className='font-bodyL font-slate-900'
-                            onChange={e => {setMortgageType(e.target.value); setErrorType('none');}}
+                            onChange={e => {setMortgageType(e.target.value); setErrorMortgageType('none');}}
                             checked={mortgageType=='repayment'}/>
-                            <span class="custom-radio"></span>
-                        <span className='font-bodyL font-slate-900'>Repayment</span>
+                            <span className="custom-radio"></span>
+                        <span className='mortgage-type font-bodyL font-slate-900'>Repayment</span>
                     </label>
                     <label className={mortgageType=='interest-only' ? 'checked': ''}>
                         <input type="radio" name="mortgageType" value="interest-only"
                             className='font-bodyL font-slate-900'   
-                            onChange={e => {setMortgageType(e.target.value); setErrorType('none');}}
+                            onChange={e => {setMortgageType(e.target.value); setErrorMortgageType('none');}}
                             checked={mortgageType=='interest-only'}/>
-                            <span class="custom-radio"></span>
-                        <span className='font-bodyL font-slate-900'>Interest only</span>
+                            <span className="custom-radio"></span>
+                        <span className='mortgage-type font-bodyL font-slate-900'>Interest only</span>
                     </label>
                     <p className='font-bodyS font-red'>
-                        {errorType !== 'none' && errorType}
+                        {errorMortgageType !== 'none' && errorMortgageType}
                     </p>
 
                 </fieldset>

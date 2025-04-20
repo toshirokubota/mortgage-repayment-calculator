@@ -55,6 +55,11 @@ main {
       border: none;
       background-color: transparent;
       border-bottom: solid 1pt hsl(var(--color-slate-700));
+      cursor: pointer;
+    }
+    .clear-all:focus, .clear-all:hover {
+      color: hsl(var(--color-slate-900));
+      border-bottom: solid 1pt hsl(var(--color-slate-900));
     }
   }
   @media (min-width: $tablet-break) {
@@ -98,22 +103,12 @@ form {
       background-color: hsl(var(--color-lime)/0.15);
       border: solid 1pt hsl(var(--color-lime));
     }
-    span {
+    label:hover, label:focus{
+      border-color: hsl(var(--color-lime));
+    }
+    .mortgage-type  {
       margin-left: 1rem;
     }
-    // input {
-    //   appearance: none;
-    //   -webkit-appearance: none;
-    //   width: 16px;
-    //   height: 16px;
-    //   padding: 2px;
-    //   border-radius: 8px;
-    //   border: solid 1pt hsl(var(--color-slate-700));
-    //   background-color: transparent;
-    // }
-    // input:checked {
-    //   border: solid 1pt hsl(var(--color-lime));
-    // }
   }
   button {
     width: 100%;
@@ -132,11 +127,16 @@ form {
   & > * {
     margin-block: 1rem;
   }
+  button:hover, button:focus {
+    background-color: hsl(var(--color-lime)/0.5);
+  }
 }
 
 /* Custom radio button */
 input[type="radio"] {
-  display: none;
+  //display: none;
+  opacity: 0;
+  //position: absolute;
 }
 /* Custom radio button container */
 .custom-radio {
@@ -173,7 +173,11 @@ input[type="radio"]:checked + .custom-radio::before {
     border: none;
     outline: none;
     padding: 0.5rem 1rem;
+    cursor: pointer;
   }  
+  &:hover, &:focus {
+    border-color: hsl(var(--color-slate-900));
+  }
   span {
     background-color: hsl(var(--color-slate-100));
     padding-block: .8rem;

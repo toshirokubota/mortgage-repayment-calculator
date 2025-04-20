@@ -55,6 +55,11 @@ main {
   border: none;
   background-color: transparent;
   border-bottom: solid 1pt hsl(var(--color-slate-700));
+  cursor: pointer;
+}
+.input-area header .clear-all:focus, .input-area header .clear-all:hover {
+  color: hsl(var(--color-slate-900));
+  border-bottom: solid 1pt hsl(var(--color-slate-900));
 }
 @media (min-width: 700px) {
   .input-area header {
@@ -98,7 +103,10 @@ form fieldset label.checked {
   background-color: hsl(var(--color-lime)/0.15);
   border: solid 1pt hsl(var(--color-lime));
 }
-form fieldset span {
+form fieldset label:hover, form fieldset label:focus {
+  border-color: hsl(var(--color-lime));
+}
+form fieldset .mortgage-type {
   margin-left: 1rem;
 }
 form button {
@@ -122,10 +130,13 @@ form button {
 form > * {
   margin-block: 1rem;
 }
+form button:hover, form button:focus {
+  background-color: hsl(var(--color-lime)/0.5);
+}
 
 /* Custom radio button */
 input[type=radio] {
-  display: none;
+  opacity: 0;
 }
 
 /* Custom radio button container */
@@ -166,6 +177,10 @@ input[type=radio]:checked + .custom-radio::before {
   border: none;
   outline: none;
   padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.input-wrapper:hover, .input-wrapper:focus {
+  border-color: hsl(var(--color-slate-900));
 }
 .input-wrapper span {
   background-color: hsl(var(--color-slate-100));
